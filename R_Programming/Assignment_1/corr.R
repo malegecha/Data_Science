@@ -9,9 +9,11 @@ corr <- function(directory, threshold = 0) {
     
     ## Return a numeric vector of correlations
     all_files = list.files(directory, pattern="*.csv")
+    
     file_names = vapply(all_files, 
                         function(elem) paste(directory,elem, sep="/"), 
                         character(1))
+    
     result = vector('numeric')
     for(i in file_names) {
         d = na.omit(read.csv(pipe(paste("cut -f2,3 -d ',' ",  i, sep=""))))

@@ -16,12 +16,12 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
                             function(elem) paste(directory,elem, sep="/"), 
                             character(1))
     
-    if (pollutant == "sulfate"){
+    if (pollutant == "sulfate") {
         col = "2"   
     } else {
         col = "3"
     }
-    
+
     values = data.frame()
     for(i in required_files) {
         temp = na.omit(read.csv(

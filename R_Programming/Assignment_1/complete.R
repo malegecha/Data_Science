@@ -19,5 +19,5 @@ complete <- function(directory, id = 1:332) {
     nobs = vapply(required_files, 
                   function(elem) NROW(na.omit(read.csv(elem))), 
                   integer(1))
-    result <- data.frame(id,nobs, row.names = NULL)
+    result <- data.frame(id, nobs, row.names = NULL)
 }
