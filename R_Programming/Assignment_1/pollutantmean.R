@@ -22,17 +22,17 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
         col = "3"
     }
 
-    values = data.frame()
+    df= data.frame()
     for(i in required_files) {
         temp = na.omit(read.csv(
             pipe(paste("cut -f", col, " -d ',' ",  i, sep=""))))
-        values = rbind(values, temp)
+        df = rbind(values, temp)
     }
     
     if (pollutant == "sulfate"){
-        mean(values$sulfate)  
+        mean(df$sulfate)  
     } else {
-        mean(values$nitrate)
+        mean(df$nitrate)
     }
     
 }
