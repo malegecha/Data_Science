@@ -17,7 +17,7 @@ complete <- function(directory, id = 1:332) {
                             function(elem) paste(directory,elem, sep="/"), 
                             character(1))
     nobs = vapply(required_files, 
-                  function(elem) NROW(na.omit(read.csv(elem))), 
+                  function(elem) nrow(na.omit(read.csv(elem))), 
                   integer(1))
     result <- data.frame(id, nobs, row.names = NULL)
 }
