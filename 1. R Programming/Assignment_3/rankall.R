@@ -1,11 +1,19 @@
 library("data.table")
-rankall <- function(outcome, num = "best") {
-
+rankall <- function(outcome, num = "best") {  
     ## Read outcome data to data.table
-    data = fread("outcome-of-care-measures.csv", colClasses = "character")
     ## Check that state, num, and outcome are valid
-    ## Strip useless columns
-    state_set = sort(unique(data$State))
+    if (outcome == "heart attack") {
+        data = fread("outcome-of-care-measures.csv", select = c(2, 7, 11), 
+                     colClasses = "character")
+    } else if (outcome == "heart failure") {
+        data = fread("outcome-of-care-measures.csv", select = c(2, 7, 17), 
+                     colClasses = "character")
+    } else if (outcome == "pneumonia"){
+        data = fread("outcome-of-care-measures.csv", select = c(2, 7, 23), 
+                     colClasses = "character")
+    } else {
+        stop("invalid outcome", call. = T)
+    }
     if (is.numeric(num)) {
         if (!num %% 1 == 0){
             stop("invalid num", call. = T)
@@ -13,15 +21,7 @@ rankall <- function(outcome, num = "best") {
     } else if (!num %in% c("best", "worst")) {
         stop("invalid num", call. = T)
     }
-    if (outcome == "heart attack") {
-        data = subset(data, select = c(2, 7, 11))
-    } else if (outcome == "heart failure") {
-        data = subset(data, select = c(2, 7, 17))
-    } else if (outcome == "pneumonia"){
-        data = subset(data, select = c(2, 7, 23))
-    } else {
-        stop("invalid outcome", call. = T)
-    }
+    
     ## rename columns    
     setnames(data, c(1:3), c("hospital", "state", "outcome"))
     ## subsetting columns
@@ -52,6 +52,7 @@ rankall <- function(outcome, num = "best") {
         }
         d[, hospital[num]]
     } 
+    state_set = sort(unique(data$state))
     result = data.table(hospital="1", state=state_set)
     ## the purpose of using three distinct get_XXX functions is avoiding
     ## redundant "if statements" checking for large datasets, 

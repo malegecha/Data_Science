@@ -1,20 +1,22 @@
 library(data.table)
 best <- function(state, outcome) {  
     ## Read outcome data to data.table
-    data = fread("outcome-of-care-measures.csv", colClasses = "character")
     ## Check that state and outcome are valid
     ## Subseting columns, remove useless columns
-    if (!state %in% unique(data$State)) {
-        stop("invalid state", call. = T)
-    }
     if (outcome == "heart attack") {
-        data = subset(data, select = c(2, 7, 11))
+        data = fread("outcome-of-care-measures.csv", select = c(2, 7, 11), 
+                     colClasses = "character")
     } else if (outcome == "heart failure") {
-        data = subset(data, select = c(2, 7, 17))
+        data = fread("outcome-of-care-measures.csv", select = c(2, 7, 17), 
+                     colClasses = "character")
     } else if (outcome == "pneumonia"){
-        data = subset(data, select = c(2, 7, 23))
+        data = fread("outcome-of-care-measures.csv", select = c(2, 7, 23), 
+                     colClasses = "character")
     } else {
         stop("invalid outcome", call. = T)
+    }
+    if (!state %in% unique(data$State)) {
+        stop("invalid state", call. = T)
     }
     ## rename columns    
     setnames(data, c(1, 3), c("Name", "Outcome"))
