@@ -28,7 +28,7 @@ rankhospital <- function(state, outcome, num = "best") {
         stop("invalid outcome", call. = T)
     }
     ## rename columns    
-    setnames(data, c(1,3), c("Name", "Outcome"))
+    setnames(data, c(1, 3), c("Name", "Outcome"))
     ## subsetting columns
     data = data[data$State == state & data$Outcome != "Not Available", ]
     ## convert character to numeric
@@ -38,9 +38,9 @@ rankhospital <- function(state, outcome, num = "best") {
     ## Return hospital name in that state with the given rank
     ## 30-day death rate
     if (num == "best") {
-        head(data,1)$Name
+        head(data, 1)$Name
     } else if (num == "worst") {
-        tail(data,1)$Name
+        tail(data, 1)$Name
     } else {
         data[, Name[num]]
     }

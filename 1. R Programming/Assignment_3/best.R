@@ -17,7 +17,7 @@ best <- function(state, outcome) {
         stop("invalid outcome", call. = T)
     }
     ## rename columns    
-    setnames(data, c(1,3), c("Name", "Outcome"))
+    setnames(data, c(1, 3), c("Name", "Outcome"))
     ## subsetting columns
     data = data[data$State == state & data$Outcome != "Not Available", ]
     ## convert character to numeric
