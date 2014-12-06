@@ -12,7 +12,7 @@ plot4 = function() {
     data$Date <- as.Date(data$Date, format="%d/%m/%Y") 
     data$POSIXTime = as.POSIXct(paste(data$Date, data$Time))
     # plot data
-    png(filename = "plot4.png")
+    png(filename = "plot4.png", width = 480, height = 480)
     par(mfrow=c(2,2), mar=c(4,4,2,1), oma=c(0,0,2,0))
     with(data, {
         plot(Global_active_power~POSIXTime, type="l", 

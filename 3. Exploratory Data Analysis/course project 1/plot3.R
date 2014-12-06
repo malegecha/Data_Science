@@ -10,7 +10,7 @@ plot3 = function() {
     data$Date <- as.Date(data$Date, format="%d/%m/%Y") 
     data$POSIXTime = as.POSIXct(paste(data$Date, data$Time))
     # plot data
-    png(filename = "plot3.png")
+    png(filename = "plot3.png", width = 480, height = 480)
         plot(data$Sub_metering_1~data$POSIXTime, type="l",
              ylab="Energy sub metering(watt-hour of active energy)", xlab="")
         lines(data$Sub_metering_2~data$POSIXTime,col='Red')

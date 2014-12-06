@@ -9,7 +9,7 @@ plot2 = function() {
     data$Date <- as.Date(data$Date, format="%d/%m/%Y") 
     data$POSIXTime = as.POSIXct(paste(data$Date, data$Time))
     # plot data
-    png(filename = "plot2.png")
+    png(filename = "plot2.png", width = 480, height = 480)
     plot(data$Global_active_power~data$POSIXTime, type="l",
          ylab="Global Active Power (kilowatts)", xlab="")
     dev.off()
