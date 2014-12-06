@@ -25,6 +25,5 @@ best <- function(state, outcome) {
     ## set key to data.table, it will sort data.table automatically
     setkeyv(data, c(Outcome = "Outcome", Name = "Name"))
     ## Return hospital name in that state with lowest 30-day death rate
-    data[[1]][1]
-    
+    head(data, 1)$Name   
 }
